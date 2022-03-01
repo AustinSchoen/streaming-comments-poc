@@ -49,7 +49,6 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(request, response) {
-  const rootDir = __dirname.replace('/server', '');
-  response.sendFile(`${rootDir}/src/index.html`);
+app.get('/test', function(request, response) {
+  response.sendFile(`${__dirname}/index.html`);
 });
