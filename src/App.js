@@ -1,24 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
+import { FrontEndCYOA } from './_components/FrontEndCYOA'
+import { SocketContext, socket } from './api/socket-api'
 
 function App() {
+  // Return FrontEndCYOA component
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SocketContext.Provider value={socket} >
+        <FrontEndCYOA />
+    </SocketContext.Provider>
   );
 }
 
