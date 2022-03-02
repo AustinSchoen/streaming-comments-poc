@@ -1,3 +1,18 @@
+body {
+  background-image: radial-gradient(gray 20%, white 20%);
+  background-position: 0 0;
+  background-size: 5px 5px;
+  height: 200px;
+  width: 100%;
+}
+
+div {
+  border: 2px solid gray;
+  border-radius: 7px;
+  padding: 5px;
+}
+
+
 .App {
   text-align: center;
 }

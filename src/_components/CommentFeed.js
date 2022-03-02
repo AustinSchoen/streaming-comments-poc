@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment } from 'Comment'
+import { Comment } from './Comment'
 
 // Container component for the Front End Assessment
 export function CommentFeed(props) {
@@ -8,7 +8,7 @@ export function CommentFeed(props) {
     return (
         <div className="commentFeed">
             <ul>
-                {props.comments.map(function(comment) {
+                {props.commentList.map(function(comment) {
                     return <Comment name={comment['name']} comment={comment['comment']} time={comment['time']} />;
                 })}
             </ul>

@@ -33,7 +33,13 @@ io.on('connection', (client) => {
         }
     });
 
-    client.on('loadExistingComments')
+    client.on('getExistingComments', () => {
+        try {
+            client.emit('loadExistingComments', comment.getComments())
+        } catch (e) {
+            emit_failure(client, e)
+        }
+    })
 });
 
 function emit_failure(client, e) {

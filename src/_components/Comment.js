@@ -1,5 +1,5 @@
 import React from 'react';
-import { CommentFooter } from 'CommentFooter'
+import { CommentFooter } from './CommentFooter'
 
 // Container component for the Front End Assessment
 export function Comment(props) {

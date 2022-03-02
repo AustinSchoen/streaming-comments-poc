@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // Container component for the Front End Assessment
-class CommentFooter extends Component {
-    render() {
-        {/* Takes in a name and time */}
-
-    }
+export function CommentFooter(props) {
+    return(
+        <div className="commentFooter">Footer test</div>
+    )
 }

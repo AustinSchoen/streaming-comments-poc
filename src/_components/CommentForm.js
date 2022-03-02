@@ -18,15 +18,21 @@ export function CommentForm(props) {
     return (
         <div className="CommentFormContainer">
             <form onSubmit={handleSubmit} className="CommentForm">
-                <label>
-                    Name:
-                    <input type="text" className="inputName" {...bindName} />
-                </label>
-                <label>
-                     Comment:
-                     <input type="textarea" className="inputComment" {...bindComment} />
-                </label>
-                <button type="submit" value="Submit" className="submitButton" />
+                <div id="nameInput">
+                    <label>
+                        <h6>Name:</h6>
+                        <input type="text" className="inputName" {...bindName} />
+                    </label>
+                </div>
+                <div id="commentInput">
+                    <label>
+                        <h6>Comment:</h6>
+                        <input type="textarea" className="inputComment" {...bindComment} />
+                    </label>
+                </div>
+                <div>
+                    <button type="submit" value="Submit" className="submitButton">Submit</button>
+                </div>
             </form>
         </div>
     );
