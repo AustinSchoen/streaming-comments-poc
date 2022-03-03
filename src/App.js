@@ -1,7 +1,8 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
 import { FrontEndCYOA } from './_components/FrontEndCYOA'
-import { SocketContext, socket } from './api/socket-api'
+import { socket } from './api/socket-api'
+import { SocketContext } from './contexts/SocketContext'
 
 function App() {
   // Return FrontEndCYOA component

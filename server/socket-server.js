@@ -1,12 +1,20 @@
-const io = require('socket.io')();
+const http = require('http')
+const socketIO = require('socket.io')
+
+const httpServer = http.createServer();
+const io = new socketIO.Server(httpServer, {
+    cors: {
+        origin: "http://localhost:3000"
+    }
+})
 
 const DAO = require('./dataAccessObject');
 const Comment = require('./comment');
 
 const newDAO = new DAO('./database.sqlite3');
-const comment = new Comment(newDAO);
+const commentDAO = new Comment(newDAO);
 
-comment.createTable().catch(error => {
+commentDAO.createTable().catch(error => {
     console.log(`Error: ${JSON.stringify(error)}`);
 });
 
@@ -14,11 +22,13 @@ io.on('connection', (client) => {
     // Do stuff on connection to server
 
     client.on('addComment', (comment) => {
+        console.log('Adding New Comment', comment)
         try {
             const parsedEvent = JSON.parse(comment)
-            comment.createComment({name: parsedEvent['name'], message: parsedEvent['comment']})
-            client.emit('ok')
-            io.emit('newComment', comment)
+            commentDAO.createComment({name: parsedEvent['name'], message: parsedEvent['comment']}).then((result) => {
+                client.emit('ok', result)
+                //io.emit('newComment', comment)
+            })
         } catch (e) {
             emit_failure(client, e)
         }
@@ -26,7 +36,7 @@ io.on('connection', (client) => {
 
     client.on('deleteComments', () => {
         try {
-            comment.deleteComments()
+            commentDAO.deleteComments()
             client.emit('ok')
         } catch (e) {
             emit_failure(client, e)
@@ -34,8 +44,11 @@ io.on('connection', (client) => {
     });
 
     client.on('getExistingComments', () => {
+        console.log("Sending existing comments")
         try {
-            client.emit('loadExistingComments', comment.getComments())
+            commentDAO.getComments().then((result) => {
+                client.emit('loadExistingComments', result)
+            })
         } catch (e) {
             emit_failure(client, e)
         }
@@ -48,4 +61,4 @@ function emit_failure(client, e) {
 
 const port = 3002;
 io.listen(port);
-console.log('listening on port ', port);
+console.log('Socket.IO Server listening on port ', port);

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useInput } from './_hooks/InputHook';
+import { SocketContext } from '../contexts/SocketContext'
 
 // Container component for the comment form
 export function CommentForm(props) {
@@ -8,11 +9,20 @@ export function CommentForm(props) {
     const { value:name, bind:bindName, reset:resetName } = useInput('Enter name')
     const { value:comment, bind:bindComment, reset:resetComment } = useInput('Enter comment')
 
+    const socket = useContext(SocketContext)
+
     const handleSubmit = (event) => {
         // TODO: handle API call... useEffect here?
         event.preventDefault();
-        alert(`Submitting Comment for ${name}`)
+        alert(`Submitting ${comment} for ${name}`)
+        socket.emit('addComment',
+            JSON.stringify({
+                'name': name,
+                'comment': comment,
+                'time': Date.now()
+            }))
         resetComment()
+        socket.emit('getExistingComments')
     }
 
     return (

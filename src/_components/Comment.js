@@ -1,13 +1,14 @@
 import React from 'react';
 import { CommentFooter } from './CommentFooter'
+import './_css/Comment.css'
 
 // Container component for the Front End Assessment
-export function Comment(props) {
+export function Comment({name, comment, time}) {
     return (
         /* Comment loads text pass to it + the CommentFooter Component (which is name and date) */
         <div className="comment">
-            {props.commentText}
-            <CommentFooter name={props.name} time={props.time} />
+            {comment}
+            <CommentFooter name={name} time={time} />
         </div>
     );
 }
