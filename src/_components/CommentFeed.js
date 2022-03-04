@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import { Comment } from './Comment'
 import { SocketContext } from '../contexts/SocketContext'
+import { Stack } from 'react-bootstrap'
 
 // Container component for the Front End Assessment
 export function CommentFeed(props) {
@@ -37,12 +38,10 @@ export function CommentFeed(props) {
     })
 
     return (
-        <div className="commentFeed">
-            <ul>
-                {comments.map(function(comment) {
-                    return <Comment key={comment['id']} name={comment['name']} comment={comment['message']} time={comment['created']} />;
-                })}
-            </ul>
-        </div>
+        <Stack gap={3}>
+            {comments.map(function(comment) {
+                return <Comment key={comment['id']} name={comment['name']} comment={comment['message']} time={comment['created']} />;
+            })}
+        </Stack>
     );
 }
