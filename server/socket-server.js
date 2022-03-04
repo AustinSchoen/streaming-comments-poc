@@ -39,6 +39,7 @@ io.on('connection', (client) => {
         try {
             commentDAO.deleteComments().then((result) => {
                 client.emit('ok')
+                io.emit('newComment')
             })
         } catch (e) {
             emit_failure(client, e)
