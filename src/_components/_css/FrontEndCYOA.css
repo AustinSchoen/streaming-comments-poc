@@ -1,8 +1,13 @@
-div.FrontEndCYOA {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 20vh;
-    background: white;
+#banner {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#tagline {
+    font-family: 'Passion One', cursive;
+    font-size: 8rem;
+}
+
+#logo {
+    margin-right: 40px;
 }
