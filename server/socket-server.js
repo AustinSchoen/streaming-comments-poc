@@ -20,6 +20,7 @@ commentDAO.createTable().catch(error => {
 
 io.on('connection', (client) => {
     // Do stuff on connection to server
+    console.log(`${client.id} is connected`)
 
     client.on('addComment', (comment) => {
         console.log('Adding New Comment', comment)
@@ -27,7 +28,7 @@ io.on('connection', (client) => {
             const parsedEvent = JSON.parse(comment)
             commentDAO.createComment({name: parsedEvent['name'], message: parsedEvent['comment']}).then((result) => {
                 client.emit('ok', result)
-                //io.emit('newComment', comment)
+                io.emit('newComment', comment)
             })
         } catch (e) {
             emit_failure(client, e)
@@ -36,8 +37,9 @@ io.on('connection', (client) => {
 
     client.on('deleteComments', () => {
         try {
-            commentDAO.deleteComments()
-            client.emit('ok')
+            commentDAO.deleteComments().then((result) => {
+                client.emit('ok')
+            })
         } catch (e) {
             emit_failure(client, e)
         }

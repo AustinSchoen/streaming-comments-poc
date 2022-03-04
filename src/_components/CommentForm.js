@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useInput } from './_hooks/InputHook';
 import { SocketContext } from '../contexts/SocketContext'
 
@@ -6,13 +6,13 @@ import { SocketContext } from '../contexts/SocketContext'
 export function CommentForm(props) {
     /* Submit a comment to the /addComment API */
 
+    // Credit: https://rangle.io/blog/simplifying-controlled-inputs-with-hooks/
     const { value:name, bind:bindName, reset:resetName } = useInput('Enter name')
     const { value:comment, bind:bindComment, reset:resetComment } = useInput('Enter comment')
 
     const socket = useContext(SocketContext)
 
     const handleSubmit = (event) => {
-        // TODO: handle API call... useEffect here?
         event.preventDefault();
         alert(`Submitting ${comment} for ${name}`)
         socket.emit('addComment',
@@ -23,6 +23,10 @@ export function CommentForm(props) {
             }))
         resetComment()
         socket.emit('getExistingComments')
+    }
+
+    const handleDelete = () => {
+        socket.emit('deleteComments')
     }
 
     return (
@@ -44,6 +48,9 @@ export function CommentForm(props) {
                     <button type="submit" value="Submit" className="submitButton">Submit</button>
                 </div>
             </form>
+            <div>
+                <button onClick={handleDelete}>Delete</button>
+            </div>
         </div>
     );
 }
