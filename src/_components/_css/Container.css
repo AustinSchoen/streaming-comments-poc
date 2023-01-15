@@ -10,4 +10,8 @@
 
 #logo {
     margin-right: 40px;
+    height: 150px;
+    width: 150px;
+    background-image: url("../_img/running_cannon.png");
+    display: inline-block;
 }

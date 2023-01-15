@@ -6,10 +6,10 @@ import { Container, Row, Col, Figure } from "react-bootstrap"
 import { gsap } from 'gsap'
 import freddie from './_img/mailchimp-freddie-icon-logo-black-and-white.png'
 import freddieWink from './_img/mailchimp-freddie-icon-wink-logo-black-and-white.png'
-import './_css/FrontEndCYOA.css'
+import './_css/Container.css'
 
-// Container component for the Front End Assessment
-export function FrontEndCYOA(props) {
+// Container component
+export function AppContainer(props) {
     const socket = useContext(SocketContext);
     useEffect(() => {
         socket.emit('getExistingComments')
@@ -23,9 +23,26 @@ export function FrontEndCYOA(props) {
         tlRef.current = gsap.timeline()
         tlRef.current.from(bannerRef.current, {x: -200, opacity: 0})
         tlRef.current.to(bannerRef.current, {x:0, opacity: 1})
-        tlRef.current.fromTo(logoRef.current,
-            {duration: 0.00, immediateRender: true,  attr: {src: freddie }},
-            {duration: 0.01, immediateRender: true,  attr: {src: freddieWink }})
+        tlRef.current.to(logoRef.current, {
+            repeat: -1,
+            duration: .6,
+            keyframes: {
+                backgroundPositionX: [
+                    "-=150px",
+                    "-=150px",
+                    "-=150px",
+                    "-=150px",
+                    "-=150px",
+                    "-=150px",
+                    "-=150px",
+                    "-=150px",
+                    "-=150px",
+                    "-=150px",
+                ],
+                ease: "none",
+                easeEach: "steps(1)"
+            }
+        })
     }, [])
 
     return (
@@ -33,9 +50,8 @@ export function FrontEndCYOA(props) {
            <Row id="banner" ref={bannerRef} className="align-items-center">
                <Col className="align-middle">
                    <div id="tagline" className="text-center display-1 fst-italic">
-                       <img ref={logoRef} id="logo" width={171} height={180} alt="Freddie"
-                            src={freddie}/>
-                       FreddieChat
+                       <div ref={logoRef} id="logo"></div>
+                       MegaChat
                    </div>
                </Col>
            </Row>

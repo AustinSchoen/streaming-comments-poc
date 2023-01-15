@@ -33,7 +33,7 @@ export function CommentForm(props) {
         <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formCommenter">
                 <Form.Label className="m-3">Name</Form.Label>
-                <Form.Control as="input" placeholder="Freddie" {...bindName}/>
+                <Form.Control as="input" placeholder="Dr. Light" {...bindName}/>
                 <Form.Label className="m-3">Comment</Form.Label>
                 <Form.Control as="textarea" placeholder="My Comment" rows={3}  {...bindComment}/>
             </Form.Group>
