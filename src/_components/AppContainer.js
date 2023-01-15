@@ -2,10 +2,8 @@ import { useContext, useEffect, useLayoutEffect, useRef } from 'react'
 import { CommentForm } from './CommentForm'
 import { CommentFeed } from  './CommentFeed'
 import { SocketContext } from '../contexts/SocketContext'
-import { Container, Row, Col, Figure } from "react-bootstrap"
+import { Container, Row, Col, } from "react-bootstrap"
 import { gsap } from 'gsap'
-import freddie from './_img/mailchimp-freddie-icon-logo-black-and-white.png'
-import freddieWink from './_img/mailchimp-freddie-icon-wink-logo-black-and-white.png'
 import './_css/Container.css'
 
 // Container component
